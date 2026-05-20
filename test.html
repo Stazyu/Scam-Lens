@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveX - Mobil Impian Anda Menanti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-hover: #ff6b81;
+            --gold: #f5c518;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --gray: #6c757d;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title .underline {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 26, 46, 0.97);
+            backdrop-filter: blur(20px);
+            padding: 10px 0;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background: var(--accent);
+            color: var(--white) !important;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-nav::after {
+            display: none !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(15, 52, 96, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(233, 69, 96, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .car-showcase {
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+        }
+
+        .car-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-placeholder i {
+            font-size: 8rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .car-placeholder .car-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .car-placeholder .car-specs {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 5px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--accent);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .badge-1 {
+            top: -15px;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .badge-2 {
+            bottom: -15px;
+            left: -20px;
+            animation-delay: 1s;
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== SEARCH BAR SECTION ===== */
+        .search-section {
+            background: var(--white);
+            padding: 40px 0;
+            position: relative;
+            z-index: 2;
+            margin-top: -40px;
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .search-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        .search-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-field label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-field input,
+        .search-field select {
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            background: var(--white);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .search-field input:focus,
+        .search-field select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+        }
+
+        .btn-search {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-search:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ===== BRANDS ===== */
+        .brands {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 25px;
+        }
+
+        .brand-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+            min-height: 120px;
+        }
+
+        .brand-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand-card i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .brand-card span {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        /* ===== FEATURED CARS ===== */
+        .cars {
+            padding: 80px 0;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .car-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .car-image {
+            height: 220px;
+            background: linear-gradient(145deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-image i {
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .car-badge.new {
+            background: #28a745;
+        }
+
+        .car-info {
+            padding: 25px;
+        }
+
+        .car-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .car-info .year-type {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .car-specs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .spec {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .spec i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .car-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .car-price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        .btn-car {
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-car:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 80px 0;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .features .section-title h2 {
+            color: var(--white);
+        }
+
+        .features .section-title p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .features .underline {
+            background: var(--gold);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 16px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card:hover {
+            background: rgba(233, 69, 96, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ff6b81);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        .why-us {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .why-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .why-icon {
+            min-width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--accent), #ff6b81);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.3rem;
+        }
+
+        .why-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .why-text p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card .quote-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            opacity: 0.3;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--dark);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ff6b81);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .author-info h5 {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            padding: 100px 0;
+            background: var(--gradient);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .cta h2 span {
+            color: var(--gold);
+        }
+
+        .cta p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 35px;
+            position: relative;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* ===== CONTACT FORM ===== */
+        .contact {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-detail .icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-detail h5 {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .contact-detail p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+
+        .contact-form {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about .logo {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .footer-about p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 35px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .cars-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .search-container {
+                grid-template-columns: 1fr;
+            }
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .brands-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">Drive<span>X</span></a>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#cars">Koleksi Mobil</a></li>
+                <li><a href="#features">Layanan</a></li>
+                <li><a href="#testimonials">Testimoni</a></li>
+                <li><a href="#contact" class="btn-nav">Hubungi Kami</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Temukan <span class="highlight">Mobil Impian</span> Anda Hari Ini</h1>
+                <p>Koleksi mobil baru dan bekas berkualitas terbaik dengan harga bersaing, proses mudah, dan layanan purna jual yang luar biasa.</p>
+                <div class="hero-buttons">
+                    <a href="#cars" class="btn-primary">
+                        <i class="fas fa-car"></i> Lihat Koleksi
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-phone-alt"></i> Konsultasi Gratis
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Unit Tersedia</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Merek Mobil</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>5.000+</h3>
+                        <p>Pelanggan Puas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="car-showcase">
+                    <div class="car-placeholder">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-name">Mobil Premium</div>
+                        <div class="car-specs">2024 | SUV | Otomatis</div>
+                    </div>
+                    <div class="floating-badge badge-1">🔥 Diskon Hingga 15%</div>
+                    <div class="floating-badge badge-2">🚗 Cicilan 0%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEARCH SECTION ===== -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-field">
+                    <label><i class="fas fa-search"></i> Merek</label>
+                    <select>
+                        <option>Pilih Merek</option>
+                        <option>Toyota</option>
+                        <option>Honda</option>
+                        <option>BMW</option>
+                        <option>Mercedes-Benz</option>
+                        <option>Audi</option>
+                    </select>
+                </div>
+                <div class="search-field">
+                    <label><i class="fas fa-dollar-sign"></i> Rentang Harga</label>
+                    <select>
+                        <option>Semua Harga</option>
+                        <option>Rp 100 - 200 Juta</option>
+                        <option>Rp 200 - 500 Juta</option>
+                        <option>Rp 500 Juta - 1 M</option>
+                        <option>Di atas 1 M</option>
+                    </select>
+                </div>
+                <div class="search-field">
+                    <label><i class="fas fa-calendar"></i> Tahun</label>
+                    <select>
+                        <option>Semua Tahun</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                    </select>
+                </div>
+                <div class="search-field">
+                    <label><i class="fas fa-cog"></i> Transmisi</label>
+                    <select>
+                        <option>Semua</option>
+                        <option>Otomatis</option>
+                        <option>Manual</option>
+                    </select>
+                </div>
+                <button class="btn-search">
+                    <i class="fas fa-search"></i> Cari Mobil
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BRANDS ===== -->
+    <section class="brands">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Merek yang Kami Bawa</h2>
+                <p>Kami menyediakan mobil dari merek-merek otomotif terkemuka dunia</p>
+                <div class="underline"></div>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #E30022;"></i>
+                    <span>Toyota</span>
+                </div>
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #A40000;"></i>
+                    <span>Honda</span>
+                </div>
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #0066B1;"></i>
+                    <span>BMW</span>
+                </div>
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #000000;"></i>
+                    <span>Mercedes</span>
+                </div>
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #BB0A30;"></i>
+                    <span>Audi</span>
+                </div>
+                <div class="brand-card fade-up">
+                    <i class="fas fa-car" style="color: #FF6900;"></i>
+                    <span>Ford</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED CARS ===== -->
+    <section class="cars" id="cars">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Koleksi Mobil Terpopuler</h2>
+                <p>Temukan berbagai pilihan mobil terbaik untuk kebutuhan Anda</p>
+                <div class="underline"></div>
+            </div>
+            <div class="cars-grid">
+                <!-- Car 1 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge">Best Seller</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>Toyota Camry</h3>
+                        <div class="year-type">2024 • SUV • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 5 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Bensin</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 2.5L</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 485.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car 2 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge new">Baru</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>BMW X5</h3>
+                        <div class="year-type">2024 • SUV • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 5 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Bensin</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 3.0L</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 1.250.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car 3 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge">Populer</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>Honda CR-V</h3>
+                        <div class="year-type">2023 • SUV • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 5 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Bensin</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 1.5L Turbo</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 625.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car 4 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge new">Baru</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>Audi A6</h3>
+                        <div class="year-type">2024 • Sedan • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 5 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Bensin</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 2.0L Turbo</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 950.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car 5 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge">Terlaris</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>Toyota Fortuner</h3>
+                        <div class="year-type">2024 • SUV • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 7 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Solar</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 2.4L</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 565.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car 6 -->
+                <div class="car-card fade-up">
+                    <div class="car-image">
+                        <i class="fas fa-car-side"></i>
+                        <div class="car-badge">Limited</div>
+                    </div>
+                    <div class="car-info">
+                        <h3>Mercedes-Benz C-Class</h3>
+                        <div class="year-type">2024 • Sedan • Otomatis</div>
+                        <div class="car-specs">
+                            <div class="spec"><i class="fas fa-user-friends"></i> 5 Penumpang</div>
+                            <div class="spec"><i class="fas fa-gas-pump"></i> Bensin</div>
+                            <div class="spec"><i class="fas fa-tachometer-alt"></i> 2.0L Turbo</div>
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">Rp 875.000.000 <span>/bulan</span></div>
+                            <a href="#" class="btn-car">Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contact" class="btn-primary">
+                    <i class="fas fa-arrow-right"></i> Lihat Semua Mobil
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Kenapa Memilih Layanan Kami</h2>
+                <p>Pengalaman terbaik dalam membeli mobil, mulai dari pemilihan hingga purna jual</p>
+                <div class="underline"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Garansi Resmi</h4>
+                    <p>Setiap pembelian dilengkapi garansi resmi dari pabrik hingga 5 tahun.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h4>Cicilan Murah</h4>
+                    <p>Bunga mulai dari 0% dengan proses approval cepat dan mudah.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-tools"></i></div>
+                    <h4>Servis Gratis</h4>
+                    <p>Service berkala gratis hingga 3 tahun atau 60.000 km.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h4>Inspeksi Menyeluruh</h4>
+                    <p>Setiap unit melewati 150+ poin pemeriksaan kualitas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY CHOOSE US ===== -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Mengapa <span style="color: var(--accent);">DriveX</span> Berbeda?</h2>
+                <p>Komitmen kami untuk memberikan pengalaman terbaik dalam setiap transaksi</p>
+                <div class="underline"></div>
+            </div>
+            <div class="why-grid">
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="why-text">
+                        <h4>Pengalaman 15+ Tahun</h4>
+                        <p>Berdiri sejak 2009, telah melayani ribuan pelanggan di seluruh Indonesia dengan dedikasi tertinggi.</p>
+                    </div>
+                </div>
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-store"></i></div>
+                    <div class="why-text">
+                        <h4>Showroom di 20+ Kota</h4>
+                        <p>Jangkauan luas memudahkan Anda mengunjungi dan memilih mobil impian kapan saja.</p>
+                    </div>
+                </div>
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="why-text">
+                        <h4>Harga Termurah & Transparan</h4>
+                        <p>Jaminan harga bersaing dengan proses negosiasi yang transparan tanpa biaya tersembunyi.</p>
+                    </div>
+                </div>
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-headset"></i></div>
+                    <div class="why-text">
+                        <h4>Layanan 24/7</h4>
+                        <p>Tim profesional siap melayani Anda kapan saja, termasuk konsultasi purna jual.</p>
+                    </div>
+                </div>
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="why-text">
+                        <h4>Proses Legalitas Lengkap</h4>
+                        <p>Bantuan lengkap dalam pengurusan BPKB, STNK, dan asuransi kendaraan.</p>
+                    </div>
+                </div>
+                <div class="why-item fade-up">
+                    <div class="why-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="why-text">
+                        <h4>Tukar Tambah Mudah</h4>
+                        <p>Program tukar tambah dengan penilaian fair dan proses cepat hanya dalam 1 hari.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Kata Pelanggan Kami</h2>
+                <p>Pengalaman nyata dari pelanggan yang telah mempercayakan DriveX</p>
+                <div class="underline"></div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-up">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Pelayanannya sangat profesional. Mobil dikirim tepat waktu dan sesuai dengan deskripsi. Sangat puas!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AJ</div>
+                        <div class="author-info">
+                            <h5>Andi Joko Santoso</h5>
+                            <p>Pembelian Toyota Camry 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Proses cicilan sangat mudah dan cepat. Staff sangat helpful. Anak saya sangat senang dengan mobil barunya!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h5>Siti Mulyani</h5>
+                            <p>Pembelian Honda CR-V 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Banyak pilihan mobil dengan harga kompetitif. Tukar tambah mobil lama berjalan lancar tanpa ribet!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">BR</div>
+                        <div class="author-info">
+                            <h5>Budi Raharjo</h5>
+                            <p>Pembelian BMW X5 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta">
+        <div class="container">
+            <h2>Siap Mengendarai <span>Mobil Impian</span> Anda?</h2>
+            <p>Dapatkan penawaran eksklusif dan diskon spesial hanya untuk Anda. Jangan lewatkan kesempatan ini!</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary">
+                    <i class="fas fa-whatsapp"></i> WhatsApp Sekarang
+                </a>
+                <a href="#contact" class="btn-secondary">
+                    <i class="fas fa-calendar-check"></i> Jadwalkan Test Drive
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT FORM ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-up">
+                <h2>Hubungi Kami</h2>
+                <p>Isi form di bawah ini dan kami akan segera membantu Anda menemukan mobil impian</p>
+                <div class="underline"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <h3>Informasi & Kontak</h3>
+                    <p>Punya pertanyaan? Tim ahli kami siap melayani Anda selama 7 hari seminggu. Silakan hubungi melalui berbagai kanal yang tersedia.</p>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h5>Alamat</h5>
+                            <p>Jl. Sudirman No. 123, Jakarta Selatan</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h5>Telepon</h5>
+                            <p>+62 800-123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h5>Email</h5>
+                            <p>info@drivex.co.id</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h5>Jam Operasional</h5>
+                            <p>Senin - Minggu: 08.00 - 21.00 WIB</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-up">
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor Telepon</label>
+                                <input type="tel" placeholder="08xx-xxxx-xxxx" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="email@contoh.com" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Merek Mobil</label>
+                                <select>
+                                    <option>Pilih Merek</option>
+                                    <option>Toyota</option>
+                                    <option>Honda</option>
+                                    <option>BMW</option>
+                                    <option>Mercedes-Benz</option>
+                                    <option>Audi</option>
+                                    <option>Ford</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Kendaraan Diminati</label>
+                                <select>
+                                    <option>Pilih Kendaraan</option>
+                                    <option>Mobil Baru</option>
+                                    <option>Mobil Bekas</option>
+                                    <option>Tukar Tambah</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Pesan / Keterangan</label>
+                            <textarea placeholder="Tulis pertanyaan atau keterangan Anda di sini..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="logo">Drive<span>X</span></a>
+                    <p>Dealer mobil terpercaya yang menyediakan berbagai pilihan kendaraan berkualitas dengan harga terbaik dan layanan profesional.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#">Jual Beli Mobil</a></li>
+                        <li><a href="#">Tukar Tambah</a></li>
+                        <li><a href="#">Pembiayaan</a></li>
+                        <li><a href="#">Test Drive</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Berita & Promo</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Lainnya</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <strong>DriveX</strong>. All Rights Reserved. | PT DriveX Teknologi Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== NAVBAR SCROLL EFFECT =====
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ===== MOBILE MENU TOGGLE =====
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // ===== SCROLL ANIMATION (Intersection Observer) =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== SMOOTH SCROLL for all anchor links =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== SIMPLE FORM HANDLING =====
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Pesan Terkirim!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

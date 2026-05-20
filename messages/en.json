@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "brand": "ScamLens"
+  },
+  "hero": {
+    "badge": "Powered by Gemini 2.5 Flash",
+    "title": "Check Before You",
+    "titleHighlight": "Get Scammed.",
+    "description": "ScamLens protects you from digital fraud threats with smart analysis for text messages, job listings, and suspicious content."
+  },
+  "footer": {
+    "text": "© {year} ScamLens. Built for digital safety in Indonesia."
+  },
+  "analyzer": {
+    "tabText": "Text Analysis",
+    "tabImage": "Image Analysis",
+    "textLabel": "Enter Suspicious Message or Content",
+    "textPlaceholder": "Paste the message or text you want to check here...",
+    "imageLabel": "Upload Screenshot or Evidence Image",
+    "imageClickPrompt": "Click to upload image",
+    "imageSupport": "Supports JPG, PNG, or Screenshots (Max 5MB)",
+    "imageMaxSize": "File size too large. Maximum 5MB.",
+    "contextLabel": "Additional Context (Optional)",
+    "contextPlaceholder": "What happened? Give a brief explanation...",
+    "changeImage": "Change Image",
+    "submitPending": "Analyzing...",
+    "submitIdle": "Start Analysis",
+    "analyzingTitle": "AI Analysis in Progress",
+    "scanningText": "Scanning text content...",
+    "scanningImage": "Scanning evidence image...",
+    "extractingKeywords": "Extracting keywords...",
+    "analyzingPatterns": "Analyzing patterns & scam modes...",
+    "calculatingRisk": "Calculating risk score...",
+    "generatingReport": "Compiling analysis report...",
+    "scanAgain": "Analyze Another Content",
+    "errorTitle": "Analysis Failed",
+    "errorApiKey": "Gemini API Key is not configured on the server. Please contact the admin or check your .env file.",
+    "errorFetch": "Internet connection lost or server unreachable. Check your connection and try again.",
+    "errorGeneral": "An internal error occurred while processing data. Please try again later.",
+    "resultTitle": "Analysis Result",
+    "explanationLabel": "Explanation",
+    "technicalMode": "Technical",
+    "simpleMode": "Plain Language",
+    "keywordsLabel": "Suspicious Keywords",
+    "riskLevel": "Risk Level",
+    "analyzeTextError": "Failed to perform analysis.",
+    "screenshotTitle": "Detected Website Preview",
+    "screenshotLoading": "Fetching website screenshot preview...",
+    "screenshotError": "Failed to load website screenshot.",
+    "screenshotSafetyNotice": "Use this preview to safely view the website without directly visiting it."
+  },
+  "trending": {
+    "title": "Trending Scam Methods",
+    "colModus": "SCAM METHOD",
+    "colPlatform": "PLATFORM",
+    "colStatus": "STATUS",
+    "colTime": "DETECTION TIME",
+    "loading": "Loading data...",
+    "empty": "No trending data yet.",
+    "error": "Failed to load trending data.",
+    "scam1": "Fake Job Listings (Like & Subscribe)",
+    "scam2": "Fake Delivery APK (Cash on Delivery scam)",
+    "scam3": "Bogus Crypto Investment 100% Return",
+    "scam4": "Fake Celebrity Giveaway",
+    "scam5": "Genuine Shopping Promo",
+    "time1": "10 minutes ago",
+    "time2": "1 hour ago",
+    "time3": "3 hours ago",
+    "time4": "5 hours ago",
+    "time5": "1 day ago"
+  },
+  "status": {
+    "safe": "Safe",
+    "caution": "Caution",
+    "danger": "Danger"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "brand": "ScamLens"
+  },
+  "hero": {
+    "badge": "Powered by Gemini 2.5 Flash",
+    "title": "Cek Dulu Sebelum",
+    "titleHighlight": "Kena Tipu.",
+    "description": "ScamLens melindungi Anda dari ancaman penipuan digital dengan analisis cerdas untuk pesan teks, lowongan kerja, dan penawaran mencurigakan."
+  },
+  "footer": {
+    "text": "© {year} ScamLens. Dibuat untuk keamanan digital masyarakat Indonesia."
+  },
+  "analyzer": {
+    "tabText": "Analisis Teks",
+    "tabImage": "Analisis Gambar",
+    "textLabel": "Masukkan Pesan atau Konten Mencurigakan",
+    "textPlaceholder": "Paste pesan atau teks yang ingin Anda cek di sini...",
+    "imageLabel": "Upload Screenshot atau Gambar Bukti",
+    "imageClickPrompt": "Klik untuk upload gambar",
+    "imageSupport": "Mendukung JPG, PNG, atau Screenshot (Maks 5MB)",
+    "imageMaxSize": "Ukuran file terlalu besar. Maksimal 5MB.",
+    "contextLabel": "Konteks Tambahan (Opsional)",
+    "contextPlaceholder": "Apa yang terjadi? Berikan penjelasan singkat...",
+    "changeImage": "Ganti Gambar",
+    "submitPending": "Menganalisis...",
+    "submitIdle": "Mulai Analisis",
+    "analyzingTitle": "Proses Analisis AI",
+    "scanningText": "Memindai konten teks...",
+    "scanningImage": "Memindai gambar bukti...",
+    "extractingKeywords": "Mengekstrak kata kunci...",
+    "analyzingPatterns": "Menganalisis pola kalimat & modus scam...",
+    "calculatingRisk": "Menghitung tingkat risiko...",
+    "generatingReport": "Menyusun laporan analisis...",
+    "scanAgain": "Analisis Konten Lain",
+    "errorTitle": "Gagal Menganalisis",
+    "errorApiKey": "API Key Gemini belum dikonfigurasi di server. Silakan hubungi admin atau cek file .env Anda.",
+    "errorFetch": "Koneksi internet terputus atau server tidak dapat dijangkau. Periksa koneksi Anda dan coba lagi.",
+    "errorGeneral": "Terjadi kesalahan internal saat memproses data. Silakan coba beberapa saat lagi.",
+    "resultTitle": "Hasil Analisis",
+    "explanationLabel": "Penjelasan",
+    "technicalMode": "Teknis",
+    "simpleMode": "Bahasa Orang Awam",
+    "keywordsLabel": "Kata Kunci Mencurigakan",
+    "riskLevel": "Tingkat Risiko",
+    "analyzeTextError": "Gagal melakukan analisis.",
+    "screenshotTitle": "Pratinjau Situs Web Dideteksi",
+    "screenshotLoading": "Mengambil gambar pratinjau situs...",
+    "screenshotError": "Gagal mengambil pratinjau situs web.",
+    "screenshotSafetyNotice": "Gunakan pratinjau ini untuk melihat situs tanpa membukanya langsung secara tidak aman."
+  },
+  "trending": {
+    "title": "Modus Penipuan Trending",
+    "colModus": "MODUS PENIPUAN",
+    "colPlatform": "PLATFORM",
+    "colStatus": "STATUS",
+    "colTime": "WAKTU DETEKSI",
+    "loading": "Memuat data...",
+    "empty": "Belum ada data trending.",
+    "error": "Gagal memuat data trending.",
+    "scam1": "Lowongan Kerja Bodong (Like & Subscribe)",
+    "scam2": "APK Kurir Paket COD",
+    "scam3": "Investasi Bodong Crypto Return 100%",
+    "scam4": "Giveaway Palsu Mengatasnamakan Artis",
+    "scam5": "Promo Diskon Belanja Asli",
+    "time1": "10 menit yang lalu",
+    "time2": "1 jam yang lalu",
+    "time3": "3 jam yang lalu",
+    "time4": "5 jam yang lalu",
+    "time5": "1 hari yang lalu"
+  },
+  "status": {
+    "safe": "Aman",
+    "caution": "Waspada",
+    "danger": "Bahaya"
+  }
+}
