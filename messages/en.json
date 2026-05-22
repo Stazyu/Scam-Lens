@@ -73,5 +73,50 @@
     "safe": "Safe",
     "caution": "Caution",
     "danger": "Danger"
+  },
+  "howItWorks": {
+    "title": "How ScamLens Works",
+    "step1Title": "1. Input Content",
+    "step1Desc": "Paste suspicious text messages or upload a screenshot of the chat or offer.",
+    "step2Title": "2. AI Analysis",
+    "step2Desc": "Gemini AI scans the text, extracts manipulative sentence patterns, and verifies link integrity.",
+    "step3Title": "3. Get Report",
+    "step3Desc": "See the risk score, list of dangerous keywords, logical explanations, and a safe website preview."
+  },
+  "education": {
+    "title": "Digital Safety Education & Tips",
+    "subtitle": "Identify common signs of online scams to avoid financial loss.",
+    "tip1Title": "Beware of APK Files",
+    "tip1Desc": "Never download or install .APK files from strangers (disguised as package couriers, wedding invitations, or bills).",
+    "tip2Title": "Check URL & Domain",
+    "tip2Desc": "Scammers often use similar domains (e.g., shopee-diskon.net instead of shopee.co.id). Always check link authenticity before logging in.",
+    "tip3Title": "Avoid Instant Profits",
+    "tip3Desc": "Investment offers with huge returns without risk, or paid 'like & subscribe' tasks are almost certainly scams.",
+    "tip4Title": "Protect Personal Data",
+    "tip4Desc": "Never share OTP codes, PINs, mother's maiden name, or ID photos with anyone for any reason."
+  },
+  "reportChannels": {
+    "title": "Report a Scam",
+    "subtitle": "If you detect or have fallen victim to a scam, report it immediately to the following official agencies:",
+    "channel1Name": "Aduan Konten Kominfo",
+    "channel1Desc": "Official Ministry of Communication and Informatics channel to report negative content, fake websites, or scam accounts.",
+    "channel1Action": "Report Content",
+    "channel2Name": "Patroli Siber",
+    "channel2Desc": "Official portal of the Cyber Crime Investigation Directorate of the Indonesian National Police to report cybercrimes.",
+    "channel2Action": "Report Cyber Crime",
+    "channel3Name": "CekRekening.id",
+    "channel3Desc": "Official platform to check and report bank accounts or e-wallets indicated in fraud.",
+    "channel3Action": "Report Bank Account"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions (FAQ)",
+    "q1": "How does the AI analysis in ScamLens work?",
+    "a1": "ScamLens uses a Large Language Model (Gemini AI) to process text or images you upload. The AI scans for manipulative sentence patterns, psychological tactics (such as urgency or instant rewards), and verifies suspicious website links.",
+    "q2": "Is my uploaded data or screenshot safe?",
+    "a2": "Yes, your security is our priority. Uploaded data is only processed for real-time analysis using the official API and will not be permanently stored on our servers or used to train AI models.",
+    "q3": "How accurate is the analysis provided by ScamLens?",
+    "a3": "Our AI analysis is excellent at detecting scam indicators based on recent sentence patterns and methods. However, this report serves as an early detection assistant. The final decision is yours; always combine it with healthy skepticism.",
+    "q4": "Is this service paid?",
+    "a4": "No, ScamLens is 100% free to use for all Indonesian people to enhance national digital security."
   }
 }

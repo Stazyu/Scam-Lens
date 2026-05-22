@@ -73,5 +73,50 @@
     "safe": "Aman",
     "caution": "Waspada",
     "danger": "Bahaya"
+  },
+  "howItWorks": {
+    "title": "Bagaimana ScamLens Bekerja?",
+    "step1Title": "1. Masukkan Konten",
+    "step1Desc": "Tempel pesan teks yang mencurigakan atau unggah screenshot bukti percakapan/penawaran.",
+    "step2Title": "2. AI Menganalisis",
+    "step2Desc": "Gemini AI memindai teks, mengekstrak pola kalimat manipulatif, dan memverifikasi integritas tautan.",
+    "step3Title": "3. Dapatkan Laporan",
+    "step3Desc": "Lihat skor tingkat risiko, daftar kata kunci berbahaya, penjelasan logis, dan preview situs web secara aman."
+  },
+  "education": {
+    "title": "Edukasi & Tips Keamanan Digital",
+    "subtitle": "Kenali tanda-tanda umum penipuan online agar terhindar dari kerugian finansial.",
+    "tip1Title": "Waspada File APK",
+    "tip1Desc": "Jangan pernah mengunduh atau menginstal file berformat .APK dari orang asing (berkedok kurir paket, undangan pernikahan, atau tagihan).",
+    "tip2Title": "Periksa URL & Domain",
+    "tip2Desc": "Penipu sering menggunakan domain mirip (misal: shopee-diskon.net, bukan shopee.co.id). Selalu cek keaslian tautan sebelum login.",
+    "tip3Title": "Jangan Tergiur Hasil Instan",
+    "tip3Desc": "Tawaran investasi dengan keuntungan besar tanpa risiko, atau tugas 'like & subscribe' berbayar hampir pasti adalah scam.",
+    "tip4Title": "Menjaga Data Pribadi",
+    "tip4Desc": "Jangan pernah membagikan kode OTP, PIN, nama ibu kandung, atau foto KTP kepada siapa pun dengan alasan apa pun."
+  },
+  "reportChannels": {
+    "title": "Melaporkan Penipuan",
+    "subtitle": "Jika Anda mendeteksi atau telah menjadi korban penipuan, segera laporkan ke instansi resmi berikut:",
+    "channel1Name": "Aduan Konten Kominfo",
+    "channel1Desc": "Saluran resmi Kementerian Kominfo untuk melaporkan konten negatif, situs web palsu, atau akun penipuan.",
+    "channel1Action": "Laporkan Konten",
+    "channel2Name": "Patroli Siber",
+    "channel2Desc": "Portal resmi Direktorat Tindak Pidana Siber Bareskrim Polri untuk melaporkan tindak pidana kejahatan siber.",
+    "channel2Action": "Laporkan Pidana Siber",
+    "channel3Name": "CekRekening.id",
+    "channel3Desc": "Platform resmi untuk memeriksa dan melaporkan rekening bank atau e-wallet yang terindikasi melakukan penipuan.",
+    "channel3Action": "Laporkan Rekening"
+  },
+  "faq": {
+    "title": "Pertanyaan Umum (FAQ)",
+    "q1": "Bagaimana cara kerja analisis AI di ScamLens?",
+    "a1": "ScamLens menggunakan Large Language Model (Gemini AI) untuk memproses teks atau gambar yang Anda unggah. AI akan memindai pola kalimat manipulatif, taktik psikologis (seperti mendesak atau menawarkan hadiah instan), serta memverifikasi kecurigaan pada link situs web.",
+    "q2": "Apakah data atau screenshot yang saya unggah aman?",
+    "a2": "Ya, keamanan Anda adalah prioritas kami. Data yang Anda unggah hanya diproses untuk analisis real-time menggunakan API resmi dan tidak akan disimpan secara permanen di server kami maupun digunakan untuk melatih model AI.",
+    "q3": "Seberapa akurat analisis yang diberikan oleh ScamLens?",
+    "a3": "Analisis AI kami sangat baik dalam mendeteksi indikasi penipuan berdasarkan pola kalimat dan modus terbaru. Namun, laporan ini bersifat sebagai asisten deteksi dini. Keputusan akhir tetap ada di tangan Anda, selalu kombinasikan dengan skeptisisme sehat.",
+    "q4": "Apakah layanan ini berbayar?",
+    "a4": "Tidak, ScamLens 100% gratis untuk digunakan oleh seluruh masyarakat Indonesia guna meningkatkan keamanan digital nasional."
   }
 }

@@ -1,9 +1,13 @@
 import { useTranslations } from "next-intl";
 import { ScamAnalyzer } from "@/components/ScamAnalyzer";
 import { TrendingTable } from "@/components/TrendingTable";
-import { ShieldCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LocaleToggle } from "@/components/LocaleToggle";
+import { HowItWorks } from "@/components/HowItWorks";
+import { EducationTips } from "@/components/EducationTips";
+import { ReportChannels } from "@/components/ReportChannels";
+import { FAQ } from "@/components/FAQ";
+import { Logo } from "@/components/Logo";
 
 export default function Home() {
   const t = useTranslations();
@@ -12,12 +16,27 @@ export default function Home() {
     <main className="min-h-screen flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl border-b border-default-100 dark:border-default-50/10">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary/10 dark:bg-primary/20 p-2 rounded-xl text-primary border border-primary/20">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <h1 className="text-xl font-extrabold tracking-tight text-foreground">
-              {t("nav.brand")}
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <Logo />
+            <h1 className="text-xl tracking-tight select-none flex items-center">
+              <span className="relative drop-shadow-[0_2px_8px_rgba(244,63,94,0.3)] dark:drop-shadow-[0_4px_16px_rgba(244,63,94,0.6)] group-hover:scale-[1.03] group-hover:brightness-110 transition-all duration-300 inline-block origin-left">
+                <span className="bg-linear-to-r from-rose-500 via-orange-500 to-amber-400 bg-clip-text text-transparent font-black tracking-tighter">
+                  Scam
+                </span>
+              </span>
+              <span className="relative ml-1.5 px-2 py-0.5 font-bold text-foreground bg-default-100/40 dark:bg-default-50/5 border border-default-200/50 dark:border-default-50/10 rounded-md transition-all duration-300 group-hover:border-orange-500/30 group-hover:bg-orange-500/5 text-sm tracking-wide flex items-center gap-1.5">
+                {/* Visual Lens focus point */}
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-500"></span>
+                </span>
+                Lens
+                {/* Focus Bracket Corners representing camera/scanner lens */}
+                <span className="absolute -top-px -left-px w-1.5 h-1.5 border-t border-l border-rose-400 dark:border-rose-400 rounded-tl-md opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute -top-px -right-px w-1.5 h-1.5 border-t border-r border-rose-400 dark:border-rose-400 rounded-tr-md opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute -bottom-px -left-px w-1.5 h-1.5 border-b border-l border-amber-400 dark:border-amber-400 rounded-bl-md opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute -bottom-px -right-px w-1.5 h-1.5 border-b border-r border-amber-400 dark:border-amber-400 rounded-br-md opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+              </span>
             </h1>
           </div>
           <div className="flex items-center gap-2">
@@ -50,6 +69,30 @@ export default function Home() {
 
         <section className="w-full mt-4">
           <TrendingTable />
+        </section>
+
+        <hr className="border-default-100 dark:border-default-50/10 w-full" />
+
+        <section className="w-full">
+          <HowItWorks />
+        </section>
+
+        <hr className="border-default-100 dark:border-default-50/10 w-full" />
+
+        <section className="w-full">
+          <EducationTips />
+        </section>
+
+        <hr className="border-default-100 dark:border-default-50/10 w-full" />
+
+        <section className="w-full">
+          <ReportChannels />
+        </section>
+
+        <hr className="border-default-100 dark:border-default-50/10 w-full" />
+
+        <section className="w-full animate-in fade-in duration-1000">
+          <FAQ />
         </section>
       </div>
 
