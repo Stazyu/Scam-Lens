@@ -36,6 +36,7 @@
     "errorTitle": "Analysis Failed",
     "errorApiKey": "Gemini API Key is not configured on the server. Please contact the admin or check your .env file.",
     "errorFetch": "Internet connection lost or server unreachable. Check your connection and try again.",
+    "errorHighDemand": "The AI service is currently busy due to very high traffic. Please try again in a few moments.",
     "errorGeneral": "An internal error occurred while processing data. Please try again later.",
     "resultTitle": "Analysis Result",
     "explanationLabel": "Explanation",
@@ -47,7 +48,9 @@
     "screenshotTitle": "Detected Website Preview",
     "screenshotLoading": "Fetching website screenshot preview...",
     "screenshotError": "Failed to load website screenshot.",
-    "screenshotSafetyNotice": "Use this preview to safely view the website without directly visiting it."
+    "screenshotSafetyNotice": "Use this preview to safely view the website without directly visiting it.",
+    "analyzedImageTitle": "Analyzed Image",
+    "clickToEnlarge": "Click to enlarge"
   },
   "trending": {
     "title": "Trending Scam Methods",

@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import { HighlightText } from "./HighlightText";
 import { useTranslations, useLocale } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Status values are locale-specific:
 // ID → "Aman" | "Waspada" | "Bahaya"
@@ -84,23 +84,12 @@ function extractUrl(text: string): string | null {
 
 interface WebsitePreviewProps {
   url: string;
+  onZoom: (imgUrl: string) => void;
 }
 
-function WebsitePreview({ url }: WebsitePreviewProps) {
+function WebsitePreview({ url, onZoom }: WebsitePreviewProps) {
   const t = useTranslations("analyzer");
   const locale = useLocale();
-  const [isZoomed, setIsZoomed] = useState(false);
-
-  useEffect(() => {
-    if (!isZoomed) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsZoomed(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isZoomed]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["screenshot", url],
@@ -117,130 +106,57 @@ function WebsitePreview({ url }: WebsitePreviewProps) {
   });
 
   return (
-    <div className="flex flex-col gap-3.5 w-full">
-      <div className="flex items-center justify-between">
-        <h4 className="font-extrabold text-default-800 dark:text-default-200 flex items-center gap-2 text-base">
-          <Globe className="w-5 h-5 text-primary" />
-          {t("screenshotTitle")}
-        </h4>
-      </div>
+    <div className="flex flex-col gap-3 w-full">
+      <h4 className="font-extrabold text-default-800 dark:text-default-200 flex items-center gap-2 text-base">
+        <Globe className="w-5 h-5 text-primary" />
+        {t("screenshotTitle")}
+      </h4>
 
-      {/* Browser Mockup Container */}
-      <div className="w-full rounded-3xl border border-default-200 dark:border-default-100/10 bg-default-50/50 dark:bg-default-100/5 overflow-hidden shadow-2xl backdrop-blur-xl">
-        {/* Browser Mockup Header */}
-        <div className="flex items-center gap-4 px-4 py-3.5 bg-default-100/50 dark:bg-default-100/10 border-b border-default-200/50 dark:border-default-100/10">
-          {/* Windows/Mac Dots */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="w-3 h-3 rounded-full bg-rose-500/80 block" />
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 block" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80 block" />
-          </div>
-
-          {/* Address Bar Mockup */}
-          <div className="flex-1 max-w-md mx-auto flex items-center justify-center gap-2 px-4 py-1.5 bg-background/60 dark:bg-background/40 border border-default-200/50 dark:border-default-100/5 rounded-xl text-xs text-default-600 dark:text-default-400 select-all truncate">
-            <Lock className="w-3.5 h-3.5 text-success shrink-0" />
-            <span className="truncate max-w-[280px] font-mono tracking-tight">{url}</span>
-          </div>
-
-          {/* External link action */}
-          <div className="shrink-0 flex items-center">
-            <a
-              href={url.startsWith("http") ? url : `https://${url}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-default-400 hover:text-primary transition-colors p-1.5 rounded-lg hover:bg-default-100 dark:hover:bg-default-100/15"
-              title="Open link in new tab"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-
-        {/* Browser Mockup Content / Screenshot Image */}
-        <div className="relative aspect-video w-full bg-default-100/20 dark:bg-default-900/10 flex items-center justify-center overflow-hidden">
-          {isLoading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 bg-default-50/40 dark:bg-default-50/5 animate-pulse">
-              <Loader2 className="w-8 h-8 text-primary animate-spin" />
-              <p className="text-sm font-bold text-default-500 text-center">
-                {t("screenshotLoading")}
-              </p>
-            </div>
-          )}
-
-          {error && (
-            <div className="flex flex-col items-center justify-center gap-3.5 p-8 text-center max-w-md">
-              <div className="p-3 bg-danger/10 text-danger rounded-2xl border border-danger/25">
-                <ShieldAlert className="w-6 h-6" />
-              </div>
-              <p className="text-sm font-extrabold text-danger leading-tight">{t("screenshotError")}</p>
-              <p className="text-xs text-default-500">
-                URL: <span className="font-mono text-default-500 break-all select-all">{url}</span>
-              </p>
-            </div>
-          )}
-
-          {data?.image && (
-            <div
-              onClick={() => setIsZoomed(true)}
-              className="relative w-full h-full overflow-hidden group cursor-zoom-in"
-            >
-              <img
-                src={data.image}
-                alt="Website screenshot"
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              
-              {/* Click to Zoom Overlay Badge */}
-              <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur-md text-white text-[11px] font-extrabold px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center gap-1.5 border border-white/10 shadow-lg">
-                <Search className="w-3.5 h-3.5 text-primary" />
-                <span>{locale === "id" ? "Klik untuk memperbesar" : "Click to enlarge"}</span>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-      <p className="text-[11px] text-default-400 dark:text-default-500 italic mt-0.5 leading-normal flex items-start gap-1.5 px-2">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
-        {t("screenshotSafetyNotice")}
-      </p>
-
-      {/* Lightbox / Enlarged Image Modal */}
-      <AnimatePresence>
-        {isZoomed && data?.image && (
-          <div
-            onClick={() => setIsZoomed(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8 cursor-zoom-out select-none"
-          >
-            {/* Close Button at top right */}
-            <button
-              onClick={() => setIsZoomed(false)}
-              className="absolute top-4 right-4 z-50 p-3 rounded-full bg-black/50 hover:bg-black/80 text-white transition-all hover:scale-105 active:scale-95 border border-white/10"
-              title="Close"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Floating Image Container with scroll */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative max-w-[95vw] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-white/10"
-              onClick={(e) => e.stopPropagation()} // prevent close when clicking image container
-            >
-              <img
-                src={data.image}
-                alt="Full website screenshot"
-                className="w-full h-auto object-contain cursor-zoom-out rounded-2xl"
-                onClick={() => setIsZoomed(false)}
-              />
-            </motion.div>
+      <div className="relative aspect-video md:aspect-[3/4] max-h-[300px] w-full rounded-2xl overflow-hidden border border-default-200 dark:border-default-100/10 bg-default-50 dark:bg-default-100/5 shadow-md cursor-zoom-in group">
+        {isLoading && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 bg-default-50/40 dark:bg-default-50/5 animate-pulse">
+            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            <p className="text-sm font-bold text-default-500 text-center">
+              {t("screenshotLoading")}
+            </p>
           </div>
         )}
-      </AnimatePresence>
+
+        {error && (
+          <div className="flex flex-col items-center justify-center gap-3.5 p-8 text-center max-w-md w-full h-full bg-default-100/20 dark:bg-default-900/10">
+            <div className="p-3 bg-danger/10 text-danger rounded-2xl border border-danger/25">
+              <ShieldAlert className="w-6 h-6" />
+            </div>
+            <p className="text-sm font-extrabold text-danger leading-tight">{t("screenshotError")}</p>
+            <p className="text-xs text-default-500 truncate max-w-full px-4">
+              URL: <span className="font-mono text-default-500 break-all select-all">{url}</span>
+            </p>
+          </div>
+        )}
+
+        {data?.image && (
+          <div
+            onClick={(e) => {
+              e.preventDefault();
+              onZoom(data.image);
+            }}
+            className="relative w-full h-full overflow-hidden group cursor-zoom-in"
+          >
+            <img
+              src={data.image}
+              alt="Website screenshot"
+              className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+              <div className="bg-black/75 backdrop-blur-md text-white text-[11px] font-extrabold px-3 py-1.5 rounded-xl border border-white/10 shadow-lg flex items-center gap-1.5">
+                <Search className="w-3.5 h-3.5 text-primary" />
+                <span>{t("clickToEnlarge")}</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -288,6 +204,48 @@ export function ScamAnalyzer() {
   const [activeTab, setActiveTab] = useState<string>("text");
   const [useSimpleMode, setUseSimpleMode] = useState(true);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [isAnalyzedImageZoomed, setIsAnalyzedImageZoomed] = useState(false);
+  const [zoomedImageUrl, setZoomedImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isAnalyzedImageZoomed) return;
+
+    // Lock scroll
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsAnalyzedImageZoomed(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isAnalyzedImageZoomed]);
+
+  useEffect(() => {
+    if (!zoomedImageUrl) return;
+
+    // Lock scroll
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomedImageUrl(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [zoomedImageUrl]);
 
   const mutation = useMutation({
     mutationFn: async (payload: { text: string; image?: string; imageMimeType?: string; locale: string }) => {
@@ -358,6 +316,7 @@ export function ScamAnalyzer() {
     mutation.reset();
     setText("");
     setImage(null);
+    setIsAnalyzedImageZoomed(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -375,16 +334,14 @@ export function ScamAnalyzer() {
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto">
-      <AnimatePresence mode="wait">
-        {!mutation.isSuccess ? (
-          <motion.div
-            key="input-form"
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.25 }}
-            className="w-full"
-          >
+      {!mutation.isSuccess ? (
+        <motion.div
+          key="input-form"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25 }}
+          className="w-full"
+        >
             <Card className="bg-background/40 dark:bg-default-50/5 backdrop-blur-xl border border-default-200 dark:border-default-100/10 shadow-2xl shadow-primary/5 overflow-hidden">
               <Card.Content className="p-0">
                 <Tabs
@@ -498,9 +455,11 @@ export function ScamAnalyzer() {
                           <p className="text-xs text-danger/80 leading-relaxed">
                             {mutation.error.message.includes("API_KEY")
                               ? t("errorApiKey")
-                              : mutation.error.message.includes("fetch")
-                                ? t("errorFetch")
-                                : t("errorGeneral")}
+                              : mutation.error.message.includes("high_demand") || mutation.error.message.includes("503") || mutation.error.message.includes("UNAVAILABLE")
+                                ? t("errorHighDemand")
+                                : mutation.error.message.includes("fetch")
+                                  ? t("errorFetch")
+                                  : t("errorGeneral")}
                           </p>
                         </div>
                       </div>
@@ -521,15 +480,13 @@ export function ScamAnalyzer() {
                       </Button>
                     </div>
 
-                    <AnimatePresence>
-                      {mutation.isPending && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0, y: 15 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -15 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="w-full mt-4 p-4 sm:p-6 rounded-2xl bg-default-50/50 dark:bg-default-100/5 border border-default-200 dark:border-default-100/10 backdrop-blur-xl shadow-inner flex flex-col gap-4 sm:gap-5 overflow-hidden"
-                        >
+                    {mutation.isPending && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: 15 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="w-full mt-4 p-4 sm:p-6 rounded-2xl bg-default-50/50 dark:bg-default-100/5 border border-default-200 dark:border-default-100/10 backdrop-blur-xl shadow-inner flex flex-col gap-4 sm:gap-5 overflow-hidden"
+                      >
                           <div className="flex items-center justify-between border-b border-default-200/50 dark:border-default-100/5 pb-3">
                             <div className="flex items-center gap-2.5">
                               <span className="relative flex h-3 w-3">
@@ -631,7 +588,6 @@ export function ScamAnalyzer() {
                           </div>
                         </motion.div>
                       )}
-                    </AnimatePresence>
                   </form>
                 </Tabs>
               </Card.Content>
@@ -643,7 +599,6 @@ export function ScamAnalyzer() {
               key="result-view"
               initial={{ opacity: 0, scale: 0.98, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.98, y: -15 }}
               transition={{ duration: 0.3 }}
               className="w-full"
             >
@@ -694,11 +649,47 @@ export function ScamAnalyzer() {
                         <span className="text-sm font-medium">{t("simpleMode")}</span>
                       </div>
                     </div>
-                    <div className="bg-default-100/50 dark:bg-default-100/10 p-6 rounded-2xl text-default-700 dark:text-default-300 leading-relaxed border border-default-200/50 dark:border-default-100/5">
+                    <div className="bg-default-100/50 dark:bg-default-100/10 p-6 rounded-2xl text-default-700 dark:text-default-300 leading-relaxed border border-default-200/50 dark:border-default-100/5 w-full">
                       {useSimpleMode
                         ? mutation.data.simpleExplanation
                         : mutation.data.technicalExplanation}
                     </div>
+
+                    {(image || scannedUrl) && (
+                      <div className={`grid grid-cols-1 ${image && scannedUrl ? "sm:grid-cols-2" : "max-w-md"} gap-6 mt-2`}>
+                        {image && (
+                          <div className="flex flex-col gap-3 w-full">
+                            <h4 className="font-extrabold text-default-800 dark:text-default-200 flex items-center gap-2 text-base">
+                              <ImageIcon className="w-5 h-5 text-primary" />
+                              {t("analyzedImageTitle")}
+                            </h4>
+                            <div 
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsAnalyzedImageZoomed(true);
+                              }}
+                              className="relative aspect-video md:aspect-[3/4] max-h-[300px] w-full rounded-2xl overflow-hidden border border-default-200 dark:border-default-100/10 bg-default-50 dark:bg-default-100/5 shadow-md cursor-zoom-in group"
+                            >
+                              <img
+                                src={image.preview}
+                                alt="Analyzed screenshot"
+                                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                                <div className="bg-black/75 backdrop-blur-md text-white text-[11px] font-extrabold px-3 py-1.5 rounded-xl border border-white/10 shadow-lg flex items-center gap-1.5">
+                                  <Search className="w-3.5 h-3.5 text-primary" />
+                                  <span>{t("clickToEnlarge")}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {scannedUrl && (
+                          <WebsitePreview url={scannedUrl} onZoom={setZoomedImageUrl} />
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {mutation.data.highlightedKeywords.length > 0 && (
@@ -725,12 +716,6 @@ export function ScamAnalyzer() {
                     </div>
                   )}
 
-                  {scannedUrl && (
-                    <div className="mt-2 pt-2">
-                      <WebsitePreview url={scannedUrl} />
-                    </div>
-                  )}
-
                   {/* Reset/Scan Again Button */}
                   <div className="flex justify-center pt-6 border-t border-default-200/50 dark:border-default-100/5 mt-4">
                     <Button
@@ -747,7 +732,72 @@ export function ScamAnalyzer() {
             </motion.div>
           )
         )}
-      </AnimatePresence>
+
+      {/* Lightbox / Enlarged Analyzed Image Modal */}
+      {isAnalyzedImageZoomed && image?.preview && (
+        <div
+          onClick={() => setIsAnalyzedImageZoomed(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8 cursor-zoom-out select-none"
+        >
+          {/* Close Button at top right */}
+          <button
+            onClick={() => setIsAnalyzedImageZoomed(false)}
+            className="absolute top-4 right-4 z-50 p-3 rounded-full bg-black/50 hover:bg-black/80 text-white transition-all hover:scale-105 active:scale-95 border border-white/10"
+            title="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Floating Image Container with scroll */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative max-w-[95vw] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()} // prevent close when clicking image container
+          >
+            <img
+              src={image.preview}
+              alt="Full analyzed screenshot"
+              className="w-full h-auto object-contain cursor-zoom-out rounded-2xl"
+              onClick={() => setIsAnalyzedImageZoomed(false)}
+            />
+          </motion.div>
+        </div>
+      )}
+
+      {/* Lightbox / Enlarged URL Screenshot Modal */}
+      {zoomedImageUrl && (
+        <div
+          onClick={() => setZoomedImageUrl(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8 cursor-zoom-out select-none"
+        >
+          {/* Close Button at top right */}
+          <button
+            onClick={() => setZoomedImageUrl(null)}
+            className="absolute top-4 right-4 z-50 p-3 rounded-full bg-black/50 hover:bg-black/80 text-white transition-all hover:scale-105 active:scale-95 border border-white/10"
+            title="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Floating Image Container with scroll */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative max-w-[95vw] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()} // prevent close when clicking image container
+          >
+            <img
+              src={zoomedImageUrl}
+              alt="Full website screenshot"
+              className="w-full h-auto object-contain cursor-zoom-out rounded-2xl"
+              onClick={() => setZoomedImageUrl(null)}
+            />
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

@@ -219,6 +219,24 @@ export async function POST(req: Request) {
     return NextResponse.json(parsedResult);
   } catch (error: any) {
     console.error("Error analyzing input:", error);
+    
+    const errMessage = error?.message || "";
+    const errString = typeof error === "object" ? JSON.stringify(error) : String(error);
+    
+    if (
+      errMessage.includes("503") ||
+      errMessage.includes("high demand") ||
+      errMessage.includes("UNAVAILABLE") ||
+      errString.includes("503") ||
+      errString.includes("high demand") ||
+      errString.includes("UNAVAILABLE")
+    ) {
+      return NextResponse.json(
+        { error: "high_demand" },
+        { status: 503 }
+      );
+    }
+
     return NextResponse.json(
       { error: "Failed to analyze the input. Please try again later." },
       { status: 500 }

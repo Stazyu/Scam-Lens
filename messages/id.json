@@ -36,6 +36,7 @@
     "errorTitle": "Gagal Menganalisis",
     "errorApiKey": "API Key Gemini belum dikonfigurasi di server. Silakan hubungi admin atau cek file .env Anda.",
     "errorFetch": "Koneksi internet terputus atau server tidak dapat dijangkau. Periksa koneksi Anda dan coba lagi.",
+    "errorHighDemand": "Layanan AI sedang sibuk karena lalu lintas (traffic) yang sangat tinggi. Silakan coba lagi beberapa saat lagi.",
     "errorGeneral": "Terjadi kesalahan internal saat memproses data. Silakan coba beberapa saat lagi.",
     "resultTitle": "Hasil Analisis",
     "explanationLabel": "Penjelasan",
@@ -47,7 +48,9 @@
     "screenshotTitle": "Pratinjau Situs Web Dideteksi",
     "screenshotLoading": "Mengambil gambar pratinjau situs...",
     "screenshotError": "Gagal mengambil pratinjau situs web.",
-    "screenshotSafetyNotice": "Gunakan pratinjau ini untuk melihat situs tanpa membukanya langsung secara tidak aman."
+    "screenshotSafetyNotice": "Gunakan pratinjau ini untuk melihat situs tanpa membukanya langsung secara tidak aman.",
+    "analyzedImageTitle": "Gambar yang Dianalisis",
+    "clickToEnlarge": "Klik untuk memperbesar"
   },
   "trending": {
     "title": "Modus Penipuan Trending",
