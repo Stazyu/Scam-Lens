@@ -11,7 +11,7 @@ export function LocaleToggle() {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const nextLocale = locale === "id" ? "en" : "id";
+  const nextLocale = locale === "id" ? "id" : "en";
 
   const toggleLocale = () => {
     const segments = pathname.split("/");
